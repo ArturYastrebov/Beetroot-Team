@@ -1,0 +1,4 @@
+from Class_python.lesson9_alfastar.alfastar.update_cheater_balance import update_cheater_balance_tuple_tuples, check_user_is_cheater
+
+update_cheater_balance_tuple_tuples()
+check_user_is_cheater()
