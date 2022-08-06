@@ -1,0 +1,20 @@
+[
+    {
+    "product": "tea",
+    "price": "13",
+    "description": "Green tea with spicy aroma",
+    "items": "50"
+  },
+    {
+    "product": "lemonade",
+    "price": "10",
+    "description": "Fresh lemonade with ice",
+    "items": "50"
+    },
+    {
+    "product": "milk",
+    "price": "12",
+    "description": "A nutrient-rich liquid food produced by the mammary glands of mammals.",
+    "items": "50"
+    }
+]

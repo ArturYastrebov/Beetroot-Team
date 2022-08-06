@@ -1,0 +1,20 @@
+[
+  {
+    "product": "burgers",
+    "price": "21",
+    "description": "Juicy beef burgers served with fries and barbecue sauce",
+    "items": "50"
+  },
+{
+    "product": "salad",
+    "price": "13",
+    "description": "Fresh Vegetable Salad",
+    "items": "50"
+  },
+  {
+    "product": "Souvlaki",
+    "price": "31",
+    "description": "A popular Greek fast food consisting of small pieces of meat and sometimes vegetables grilled on a skewer.",
+    "items": "50"
+  }
+]

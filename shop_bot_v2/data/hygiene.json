@@ -1,0 +1,20 @@
+[
+    {
+    "product": "shampoo",
+    "price": "21",
+    "description": "Japanese shampoo with green tea flavor",
+    "items": "50"
+  },
+    {
+    "product": "toothpaste",
+    "price": "22",
+    "description": "Korean toothpaste, excellent against tooth decay",
+    "items": "50"
+  },
+  {
+    "product": "soap",
+    "price": "31",
+    "description": "Soap is created by mixing fats and oils with a base",
+    "items": "50"
+  }
+]
