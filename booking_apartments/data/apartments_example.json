@@ -1,0 +1,26 @@
+
+{
+    "Big_house"  :
+  {
+    "free_time": [["01.01.2022", "24.2.2022"], ["01.09.2022", "31.12.2035"]],
+    "people": "12",
+    "price": "1200",
+   "description" : "Rooms feature natural wood design and include a dressing table and heated floors in the halls and bathrooms."
+  },
+       "Club_house"  :
+  {
+    "free_time": [["01.01.2022", "01.02.2022"], ["01.09.2022", "31.12.2035"]],
+    "people": "8",
+    "price": "800",
+   "description" : "The rooms have a flat.screen TV with cable channels."
+  },
+         "Huge_house"  :
+  {
+    "free_time": [["01.01.2022", "24.2.2022"], ["01.09.2022", "31.12.2035"]],
+    "people": "7",
+    "price": "900",
+   "description" : "Each room features a balcony and mountain as well as pool views."
+  }
+}
+
+
