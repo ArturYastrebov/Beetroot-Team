@@ -19,9 +19,9 @@ def check_str_data(str_data):
         if convert_str_to_time(str_data) <= datetime.datetime.now().date():
             raise TimeoutError
     except TimeoutError:
-        print('You have selected a date in the past,try again')
+        print('\033[31mYou have selected a date in the past,try again\033[0m')
     except Exception:
-        print('Incorrect format data,try again')
+        print('\033[31mIncorrect format data,try again\033[0m')
     else:
         print('Correct format data')
         return True
@@ -30,7 +30,7 @@ def check_str_data(str_data):
 def input_date():
     check_data = False
     while not check_data:
-        date_booking = f'{input("day")}.{input("month")}.{input("Year")}'
+        date_booking = f'{input("day: ")}.{input("month: ")}.{input("Year: ")}'
         check_data = check_str_data(date_booking)
     date_booking = convert_str_to_time(date_booking)
     return date_booking, check_data
@@ -42,70 +42,77 @@ data_apartments = load_data_apartments(data_path_apartments)
 
 
 def input_search_data():
-    count_of_people = input_count_of_people()
-    max_money = input_count_of_max_money()
     check_data = False
     while not check_data:
-        print('User,chose the date of booking:')
+        print('\033[1;34mUser,chose the date of booking:\033[0m')
         start_date_booking, check_data = input_date()
-        actions = input('Would you like put down count of day - (D) or the last day of booking - (L)')
+        actions = input('\033[1;34mWould you like put down count of day - (D) or the last day of booking - (L) \033[0m')
         if actions.upper() == 'D':
-            count_day = input('Put count of days')
+            count_day = input('\033[1;34mPut count of days: \033[0m')
             end_date_booking = start_date_booking + datetime.timedelta(int(count_day))
         elif actions.upper() == 'L':
-            print('User,chose the last date of booking:')
+            print('\033[1;34mUser,chose the last date of booking:\033[0m')
             end_date_booking, check_data = input_date()
         else:
-            print('Incorrect value, please try again')
+            print('\033[31mIncorrect value, please try again\033[0m')
             return input_search_data()
         if start_date_booking > end_date_booking:
             check_data = False
-            print('OMG!!! start_date_booking > end_date_booking, try again.')
+            print('\033[31mOMG!!! start_date_booking > end_date_booking, try again.\033[0m')
+    return start_date_booking, end_date_booking
 
+
+def collect_input_inf():
+    count_of_people = input_count_of_people()
+    max_money = input_count_of_max_money()
+    start_date_booking, end_date_booking = input_search_data()
     return show_apartment(data_apartments, start_date_booking, end_date_booking, count_of_people, max_money)
+
 
 def input_count_of_people():
     while 1:
-        count_of_people = input('User,how many people will live in the apartments?')
+        count_of_people = input('\033[1;34mUser,how many people will live in the apartments? \033[0m')
         if count_of_people.isdigit():
             if int(count_of_people) > 0:
                 return int(count_of_people)
-        print("OMG!!!Incorrect value, please try again")
+        print("\033[31mOMG!!!Incorrect value, please try again\033[0m")
 
 def input_count_of_max_money():
     while 1:
-        max_money = input('User,up to what amount money to search ?')
+        max_money = input('\033[1;34mUser,up to what amount money to search? \033[0m')
         if max_money.isdigit():
             if int(max_money) > 0:
                 return int(max_money)
-        print("OMG!!!Incorrect value, please try again")
+        print("\033[31mOMG!!!Incorrect value, please try again\033[31m")
 
 def show_apartment(data_apartments, start_date_booking, end_date_booking, count_of_people, max_money):
     print(f'In your days >>> {convert_time_to_str(start_date_booking)} - {convert_time_to_str(end_date_booking)} <<< available:')
+    count = 0
     key_id = {}
     for key, apartment in data_apartments.items():
         if count_of_people <= int(apartment["people"]):
             if max_money >= int(apartment["price"]):
-                for i, period_time in enumerate(apartment['free_time']):
+                for period_time in apartment['free_time']:
                     if convert_str_to_time(period_time[0]) <= start_date_booking and (
                             end_date_booking <= convert_str_to_time(period_time[1])):
-                        print(f'\n*** {key} ***\nUp to {apartment["people"]} people can live in the apartments\nPrice per day: {apartment["price"]}')
-                        print(f'Description : {apartment["description"]}\n>>>> {i} <<<< press, if you want to book {key} <<<')
-                        key_id[str(i)] = key
+                        count += 1
+                        print(f'\n\033[1;7m*** {key} ***\033[0m\nUp to {apartment["people"]} people can live in the apartments\nPrice per day: {apartment["price"]}')
+                        print(f'Description : {apartment["description"]}\n\033[1;34m>>>> {count} <<<< press, if you want to book {key} <<<\033[0m')
+                        key_id[str(count)] = key
     return choice_num_apart(key_id, start_date_booking, end_date_booking)
 
 
 def choice_num_apart(key_id, start_date_booking, end_date_booking):
     while 1:
-        actions = input(f"\n_________________________________\nPut down from 1 to {len(key_id)} or Return (R)")
+        actions = input(f"\n_________________________________\n\033[1;34mPut down from 1 to {len(key_id)} or Return (R)\033[0m")
         if actions.upper() == "R":
-            print('tyt byde function')
+            collect_input_inf()
         elif actions.isdigit():
             if int(actions) in list(range(1, len(key_id)+1)):
                 apart = key_id[actions]
                 print(apart)
                 return booking_apartment(data_apartments, apart, start_date_booking, end_date_booking)
-        print('Incorrect value, please try again')
+        print('\033[31mIncorrect value, please try again\033[0m')
 
 
 def booking_apartment(data_apartments, apart, start_date_booking, end_date_booking):
@@ -117,6 +124,6 @@ def booking_apartment(data_apartments, apart, start_date_booking, end_date_booki
             free_time_zones.append([convert_time_to_str(end_date_booking), period_time[1]])
             free_time_zones.pop(i)
             pprint(data_apartments)
-            break
+            collect_input_inf()
 
-input_search_data()
+collect_input_inf()
