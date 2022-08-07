@@ -20,6 +20,34 @@
     "people": "7",
     "price": "900",
    "description" : "Each room features a balcony and mountain as well as pool views."
+  },
+         "Squirrel Hole"  :
+  {
+    "free_time": [["01.10.2022", "30.4.2023"], ["01.09.2023", "31.12.2023"]],
+    "people": "4",
+    "price": "650",
+   "description" : "Apartments in wooden style where you feel like living in a home of squirrel"
+  },
+         "Space for Lovers"  :
+  {
+    "free_time": [["01.09.2022", "20.10.2022"], ["01.12.2022", "31.12.2022"]],
+    "people": "2",
+    "price": "1000",
+   "description" : "Apartment has one big room with one king-size bed."
+  },
+         "Welcome Home Apartments"  :
+  {
+    "free_time": [["01.01.2022", "24.12.2022"], ["01.02.2023", "31.12.2023"]],
+    "people": "4",
+    "price": "590",
+   "description" : "Two separate rooms with one common bath and kitchen"
+  },
+         "Pershi Pivni"  :
+  {
+    "free_time": [["01.01.2022", "10.09.2022"], ["01.11.2022", "31.12.2022"]],
+    "people": "5",
+    "price": "1200",
+   "description" : "Two stores small house with two rooms, one balcony in each"
   }
 }
 
