@@ -16,12 +16,16 @@ def convert_str_to_time(data_str):
 
 def check_str_data(str_data):
     try:
-        convert_str_to_time(str_data)
+        if convert_str_to_time(str_data) <= datetime.datetime.now().date():
+            raise TimeoutError
+    except TimeoutError:
+        print('You have selected a date in the past,try again')
     except Exception:
         print('Incorrect format data,try again')
     else:
         print('Correct format data')
         return True
+
 
 def input_date():
     check_data = False
@@ -49,7 +53,9 @@ def input_search_data():
         elif actions.upper() == 'L':
             print('User,chose the last date of booking:')
             end_date_booking, check_data = input_date()
-        else: print('Incorrect value, please try again')
+        else:
+            print('Incorrect value, please try again')
+            return input_search_data()
         if start_date_booking > end_date_booking:
             check_data = False
             print('OMG!!! start_date_booking > end_date_booking, try again.')
