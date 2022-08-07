@@ -42,6 +42,8 @@ data_apartments = load_data_apartments(data_path_apartments)
 
 
 def input_search_data():
+    count_of_people = input_count_of_people()
+    max_money = input_count_of_max_money()
     check_data = False
     while not check_data:
         print('User,chose the date of booking:')
@@ -59,21 +61,37 @@ def input_search_data():
         if start_date_booking > end_date_booking:
             check_data = False
             print('OMG!!! start_date_booking > end_date_booking, try again.')
-    return show_apartment(data_apartments, start_date_booking, end_date_booking)
 
+    return show_apartment(data_apartments, start_date_booking, end_date_booking, count_of_people, max_money)
 
-def show_apartment(data_apartments, start_date_booking, end_date_booking):
+def input_count_of_people():
+    while 1:
+        count_of_people = input('User,how many people will live in the apartments?')
+        if count_of_people.isdigit():
+            if int(count_of_people) > 0:
+                return int(count_of_people)
+        print("OMG!!!Incorrect value, please try again")
+
+def input_count_of_max_money():
+    while 1:
+        max_money = input('User,up to what amount money to search ?')
+        if max_money.isdigit():
+            if int(max_money) > 0:
+                return int(max_money)
+        print("OMG!!!Incorrect value, please try again")
+
+def show_apartment(data_apartments, start_date_booking, end_date_booking, count_of_people, max_money):
     print(f'In your days >>> {convert_time_to_str(start_date_booking)} - {convert_time_to_str(end_date_booking)} <<< available:')
-    count = 0
     key_id = {}
     for key, apartment in data_apartments.items():
-        count += 1
-        for i, period_time in enumerate(apartment['free_time']):
-            if convert_str_to_time(period_time[0]) <= start_date_booking and (
-                    end_date_booking <= convert_str_to_time(period_time[1])):
-                print(f'\n*** {key} ***\nUp to {apartment["people"]} people can live in the apartments\nPrice per day: {apartment["price"]}')
-                print(f'Description : {apartment["description"]}\n>>>> {count} <<<< press, if you want to book {key} <<<')
-                key_id[str(count)] = key
+        if count_of_people <= int(apartment["people"]):
+            if max_money >= int(apartment["price"]):
+                for i, period_time in enumerate(apartment['free_time']):
+                    if convert_str_to_time(period_time[0]) <= start_date_booking and (
+                            end_date_booking <= convert_str_to_time(period_time[1])):
+                        print(f'\n*** {key} ***\nUp to {apartment["people"]} people can live in the apartments\nPrice per day: {apartment["price"]}')
+                        print(f'Description : {apartment["description"]}\n>>>> {i} <<<< press, if you want to book {key} <<<')
+                        key_id[str(i)] = key
     return choice_num_apart(key_id, start_date_booking, end_date_booking)
 
 
