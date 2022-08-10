@@ -1,25 +1,38 @@
-
 {
-    "Wolf_1995"  :
-  {
-    "password": "qwerty12345",
-    "name": "Andriy",
-    "second_name": "Lynin",
-    "balance": "18500"
-  },
-  "Fox_777"  :  {
-    "password": "A1234512345",
-    "name": "Oleksandr",
-    "second_name": "Zinchenko",
-    "balance": "18000"
-  },
-  "Lucky_guy"  :
-  {
-    "password": "0985676767A",
-    "name": "Andriy",
-    "second_name": "Shevchenko",
-    "balance": "20000"
-  }
+    "Wolf_1995": {
+        "password": "qwerty12345",
+        "name": "Andriy",
+        "second_name": "Lynin",
+        "balance": "18500"
+    },
+    "Fox_777": {
+        "password": "A1234512345",
+        "name": "Oleksandr",
+        "second_name": "Zinchenko",
+        "balance": "18000"
+    },
+    "Lucky_guy": {
+        "password": "0985676767A",
+        "name": "Andriy",
+        "second_name": "Shevchenko",
+        "balance": "20000"
+    },
+    "Levs192": {
+        "password": "Art1234!",
+        "name": "Artur",
+        "second_name": "Yastrebov",
+        "balance": "0"
+    },
+    "Tornado": {
+        "password": "dwrs'y_\\Tv",
+        "name": "Volodymyr",
+        "second_name": "Velykyj",
+        "balance": "0"
+    },
+    "Samanta": {
+        "password": "<4?\"nXy7U\"",
+        "name": "Liza",
+        "second_name": "Konnor",
+        "balance": "0"
+    }
 }
-
-
