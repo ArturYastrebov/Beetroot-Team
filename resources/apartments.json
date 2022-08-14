@@ -1,0 +1,180 @@
+{
+    "Big_house": {
+        "free_time": [
+            [
+                "01.01.2022",
+                "24.2.2022"
+            ],
+            [
+                "01.09.2022",
+                "01.10.2022"
+            ],
+            [
+                "04.10.2022",
+                "05.10.2022"
+            ],
+            [
+                "08.10.2022",
+                "31.12.2035"
+            ]
+        ],
+        "people": "12",
+        "price": "1200",
+        "description": "Rooms feature natural wood design and include a dressing table and heated floors in the halls and bathrooms."
+    },
+    "Club_house": {
+        "free_time": [
+            [
+                "01.01.2022",
+                "01.02.2022"
+            ],
+            [
+                "01.09.2022",
+                "31.12.2035"
+            ]
+        ],
+        "people": "8",
+        "price": "800",
+        "description": "The rooms have a flat.screen TV with cable channels."
+    },
+    "Huge_house": {
+        "free_time": [
+            [
+                "01.01.2022",
+                "24.2.2022"
+            ],
+            [
+                "11.10.2023",
+                "31.12.2035"
+            ],
+            [
+                "01.09.2022",
+                "01.10.2022"
+            ],
+            [
+                "11.10.2022",
+                "01.10.2023"
+            ]
+        ],
+        "people": "7",
+        "price": "900",
+        "description": "Each room features a balcony and mountain as well as pool views."
+    },
+    "Squirrel Hole": {
+        "free_time": [
+            [
+                "01.10.2022",
+                "30.4.2023"
+            ],
+            [
+                "01.09.2023",
+                "31.12.2023"
+            ]
+        ],
+        "people": "4",
+        "price": "650",
+        "description": "Apartments in wooden style where you feel like living in a home of squirrel"
+    },
+    "Space for Lovers": {
+        "free_time": [
+            [
+                "01.09.2022",
+                "20.10.2022"
+            ],
+            [
+                "01.12.2022",
+                "31.12.2022"
+            ]
+        ],
+        "people": "2",
+        "price": "1000",
+        "description": "Apartment has one big room with one king-size bed."
+    },
+    "Welcome Home Apartments": {
+        "free_time": [
+            [
+                "01.02.2023",
+                "31.12.2023"
+            ],
+            [
+                "01.01.2022",
+                "01.11.2022"
+            ],
+            [
+                "04.11.2022",
+                "24.12.2022"
+            ]
+        ],
+        "people": "4",
+        "price": "590",
+        "description": "Two separate rooms with one common bath and kitchen"
+    },
+    "Pershi Pivni": {
+        "free_time": [
+            [
+                "01.01.2022",
+                "10.09.2022"
+            ],
+            [
+                "01.11.2022",
+                "31.12.2022"
+            ]
+        ],
+        "people": "5",
+        "price": "1200",
+        "description": "Two stores small house with two rooms, one balcony in each"
+    },
+    "Wolf_house": {
+        "free_time": [
+            [
+                "01.10.2022",
+                "05.10.2022"
+            ],
+            [
+                "09.10.2022",
+                "01.01.2025"
+            ]
+        ],
+        "description": "This is house has two rooms. Apartments stay between river and forest. Also you will have beautiful view through windows.",
+        "people": "4",
+        "price": "650"
+    },
+    "Artur_hata": {
+        "free_time": [
+            [
+                "04.10.2022",
+                "01.01.2025"
+            ],
+            [
+                "01.09.2022",
+                "01.09.2022"
+            ],
+            [
+                "11.09.2022",
+                "01.10.2022"
+            ]
+        ],
+        "description": " It's a big house. There is a corridor, kitchen, two bedrooms, two living rooms and bathroom.",
+        "people": "4",
+        "price": "800"
+    },
+    "Katya_hata": {
+        "free_time": [
+            [
+                "04.11.2022",
+                "01.01.2025"
+            ],
+            [
+                "01.10.2022",
+                "01.10.2022"
+            ],
+            [
+                "11.10.2022",
+                "01.11.2022"
+            ]
+        ],
+        "description": "A huge apartmentA huge apartmentA huge apartmentA huge apartment",
+        "people": "6",
+        "price": "600"
+    }
+}

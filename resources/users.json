@@ -1,0 +1,86 @@
+{
+    "Wolf_1995": {
+        "password": "qwerty12345",
+        "name": "Andriy",
+        "second_name": "Lynin",
+        "balance": "5900"
+    },
+    "Fox_777": {
+        "password": "A1234512345",
+        "name": "Oleksandr",
+        "second_name": "Zinchenko",
+        "balance": "300"
+    },
+    "Lucky_guy": {
+        "password": "0985676767A",
+        "name": "Andriy",
+        "second_name": "Shevchenko",
+        "balance": "20000"
+    },
+    "Levs192": {
+        "password": "Art1234!",
+        "name": "Artur",
+        "second_name": "Yastrebov",
+        "balance": "0"
+    },
+    "Tornado": {
+        "password": "dwrs'y_\\Tv",
+        "name": "Volodymyr",
+        "second_name": "Velykyj",
+        "balance": "0"
+    },
+    "Samanta": {
+        "password": "<4?\"nXy7U\"",
+        "name": "Liza",
+        "second_name": "Konnor",
+        "balance": "0"
+    },
+    "Sasha_2002": {
+        "password": "g:VzoRS?W9",
+        "name": "Sasha",
+        "second_name": "Goodar",
+        "balance": "0"
+    },
+    "Hero_man": {
+        "password": "asAs12!@",
+        "name": "Artur",
+        "second_name": "Yastrebov",
+        "balance": "0"
+    },
+    "info_user": {
+        "password": "BQ*SQG&?`p",
+        "name": "Alex",
+        "second_name": "Alexey",
+        "balance": "20000"
+    },
+    "Levs_Cat": {
+        "password": "!\"Wzk(RclU",
+        "name": "Vasya",
+        "second_name": "Gonchar",
+        "balance": "8230"
+    },
+    "Artur_1992": {
+        "password": "12345Artur!",
+        "name": "Artur",
+        "second_name": "Yastrebov",
+        "balance": "92200"
+    },
+    "Katya_girl": {
+        "password": ":it,rL@E/>",
+        "name": "Katya",
+        "second_name": "Gosha",
+        "balance": "18200"
+    },
+    "Nurman": {
+        "password": "25t)\\M0pWY",
+        "name": "Nurman",
+        "second_name": "Hasanovich",
+        "balance": "8001"
+    },
+    "Tolya_wolf": {
+        "password": "yPV$i<boxq",
+        "name": "Tolya",
+        "second_name": "Vasulievuch",
+        "balance": "4200"
+    }
+}
