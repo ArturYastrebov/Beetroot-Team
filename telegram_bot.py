@@ -7,7 +7,7 @@ from aiofiles import os
 
 from data_parser import parser_items, get_category_menu, get_ikea_category_data, \
     COMMAND_CATEGORY_MENU
-from formatter import formatter_manu, FORMATTER_DICT
+from formatter import formatter_menu, FORMATTER_DICT
 
 from config import TOKEN
 
@@ -46,6 +46,7 @@ async def cmd_start(message: types.Message):
     await bot.send_message(chat_id=message.from_user.id, text=category_menu)
     await ClientStatesGroup.category.set()
 
+
 @dp.message_handler(
     lambda message: message.text in str(list(COMMAND_CATEGORY_MENU.keys())) and message.text != "0",
     state=ClientStatesGroup.category,
@@ -76,7 +77,7 @@ async def sub_category_handler(message: types.Message, state: FSMContext):
         await message.answer(f'You have selected the {data["sub_category"]["title"]} subcategory')
     await message.answer(f"Select the format for saving the result")
     answer_data = ""
-    formatter_menu_list = formatter_manu(FORMATTER_DICT)
+    formatter_menu_list = formatter_menu(FORMATTER_DICT)
     for formatter_data in formatter_menu_list:
         answer_data += f"/{formatter_data[0]}" + " - " + formatter_data[1] + "\n"
     print(f"{message.from_user.id} on type_formatter menu")
@@ -90,7 +91,7 @@ async def type_formatter(message: types.Message, state: FSMContext):
         message.text = "/" + message.text
     await message.answer(f"Start parsing...please wait")
     async with state.proxy() as data:
-        formatter_menu_list = formatter_manu(FORMATTER_DICT)
+        formatter_menu_list = formatter_menu(FORMATTER_DICT)
         data["type_formatter"] = formatter_menu_list[int(message.text[1:]) - 1][1]
         print(f"{message.chat.id} try to pars in {data['type_formatter']}")
         pars_data, title = parser_items(data["sub_category"])

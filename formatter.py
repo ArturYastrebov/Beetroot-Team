@@ -3,6 +3,7 @@ import aiofiles
 from aiocsv import AsyncWriter
 from fpdf import FPDF
 
+
 async def save_csv(data, title):
     async with aiofiles.open(f"{title}.csv", "w", newline="", encoding="utf-8") as file:
         writer = AsyncWriter(file)
@@ -60,9 +61,6 @@ FORMATTER_DICT = {
 }
 
 
-def formatter_manu(formatter_command_dict) -> list:
+def formatter_menu(formatter_command_dict) -> list:
     formatter_menu_list = [(index, formatter) for index, formatter in enumerate(formatter_command_dict.keys(), start=1)]
     return formatter_menu_list
-
-
-

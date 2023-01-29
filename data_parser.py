@@ -34,13 +34,14 @@ def get_content(html):
         cards[title_card.text] = my_list_cards
     return cards
 
-def get_ikea_category_data(): # IKEA_data
+
+def get_ikea_category_data():
     html = get_html(URL)
     ikea_category_data = get_content(html)
     return ikea_category_data
 
 
-def get_category_menu() -> str: # command_manu
+def get_category_menu() -> str:
     ikea_category_data = get_ikea_category_data()
     category_menu = ""
     for index, key in enumerate(ikea_category_data.keys(), start=1):
@@ -48,12 +49,13 @@ def get_category_menu() -> str: # command_manu
     return category_menu
 
 
-def get_command_category_menu() -> dict: # command_dict
+def get_command_category_menu() -> dict:
     ikea_category_data = get_ikea_category_data()
     command_category_menu = {}
     for index, key in enumerate(ikea_category_data.keys(), start=1):
         command_category_menu[f"/{index}"] = key
     return command_category_menu
+
 
 COMMAND_CATEGORY_MENU = get_command_category_menu()
 
