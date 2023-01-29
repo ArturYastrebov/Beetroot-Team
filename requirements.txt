@@ -1,0 +1,5 @@
+requests~=2.28.2
+monobank~=0.4.4
+fpdf~=1.7.2
+aiogram~=2.24
+aiofiles~=22.1.0
