@@ -34,18 +34,28 @@ def get_content(html):
         cards[title_card.text] = my_list_cards
     return cards
 
+def get_ikea_category_data(): # IKEA_data
+    html = get_html(URL)
+    ikea_category_data = get_content(html)
+    return ikea_category_data
 
-html = get_html(URL)
-IKEA_data = get_content(html)
+
+def get_category_menu() -> str: # command_manu
+    ikea_category_data = get_ikea_category_data()
+    category_menu = ""
+    for index, key in enumerate(ikea_category_data.keys(), start=1):
+        category_menu += f"/{index}" + f" - {key} \n"
+    return category_menu
 
 
-def format_str_command_manu():
-    command_manu = ""
-    command_dict = {}
-    for index, key in enumerate(IKEA_data.keys(), start=1):
-        command_manu += f"/{index}" + f" - {key} \n"
-        command_dict[f"/{index}"] = key
-    return command_manu, command_dict, IKEA_data
+def get_command_category_menu() -> dict: # command_dict
+    ikea_category_data = get_ikea_category_data()
+    command_category_menu = {}
+    for index, key in enumerate(ikea_category_data.keys(), start=1):
+        command_category_menu[f"/{index}"] = key
+    return command_category_menu
+
+COMMAND_CATEGORY_MENU = get_command_category_menu()
 
 
 def parser_items(test_data):

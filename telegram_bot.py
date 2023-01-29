@@ -5,17 +5,15 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiofiles import os
 
-from data_parser import format_str_command_manu, parser_items
-from formatter import formatter_manu, FORMATTER_DICT, save_csv
+from data_parser import parser_items, get_category_menu, get_ikea_category_data, \
+    COMMAND_CATEGORY_MENU
+from formatter import formatter_manu, FORMATTER_DICT
 
 from config import TOKEN
 
 storage = MemoryStorage()
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
-
-COMMAND_MENU, COMMAND_DICT, IKEA_data = format_str_command_manu()
-formatter_menu_list = formatter_manu(FORMATTER_DICT)
 
 
 class ClientStatesGroup(StatesGroup):
@@ -44,23 +42,24 @@ async def cmd_start(message: types.Message):
     )
     await message.answer("Welcome to IKEA pars bot\nSelect the number of category you want to parse\n")
     print(f"{message.from_user.id} on category menu")
-    await bot.send_message(chat_id=message.from_user.id, text=COMMAND_MENU)
+    category_menu = get_category_menu()
+    await bot.send_message(chat_id=message.from_user.id, text=category_menu)
     await ClientStatesGroup.category.set()
 
-
 @dp.message_handler(
-    lambda message: message.text in str(list(COMMAND_DICT.keys())) and message.text != "0",
+    lambda message: message.text in str(list(COMMAND_CATEGORY_MENU.keys())) and message.text != "0",
     state=ClientStatesGroup.category,
 )
 async def category_handler(message: types.Message, state: FSMContext):
+    ikea_data = get_ikea_category_data()
     if message.text[:1] != "/":
         message.text = "/" + message.text
     async with state.proxy() as data:
-        data["category"] = COMMAND_DICT[message.text]
-    await message.answer(f"You have selected the {COMMAND_DICT[message.text]} category")
+        data["category"] = COMMAND_CATEGORY_MENU[message.text]
+    await message.answer(f"You have selected the {COMMAND_CATEGORY_MENU[message.text]} category")
     await message.answer(f"Select a subcategory to parse")
     answer_data = ""
-    for index, category in enumerate(IKEA_data[COMMAND_DICT[message.text]], start=1):
+    for index, category in enumerate(ikea_data[COMMAND_CATEGORY_MENU[message.text]], start=1):
         answer_data += f"/{index}" + " - " + category.get("title") + "\n"
     print(f"{message.from_user.id} on sub_category menu")
     await message.answer(answer_data, reply_markup=get_cancel())
@@ -72,10 +71,12 @@ async def sub_category_handler(message: types.Message, state: FSMContext):
     if message.text[:1] != "/":
         message.text = "/" + message.text
     async with state.proxy() as data:
-        data["sub_category"] = IKEA_data[data["category"]][int(message.text[1:]) - 1]
+        ikea_data = get_ikea_category_data()
+        data["sub_category"] = ikea_data[data["category"]][int(message.text[1:]) - 1]
         await message.answer(f'You have selected the {data["sub_category"]["title"]} subcategory')
     await message.answer(f"Select the format for saving the result")
     answer_data = ""
+    formatter_menu_list = formatter_manu(FORMATTER_DICT)
     for formatter_data in formatter_menu_list:
         answer_data += f"/{formatter_data[0]}" + " - " + formatter_data[1] + "\n"
     print(f"{message.from_user.id} on type_formatter menu")
@@ -89,6 +90,7 @@ async def type_formatter(message: types.Message, state: FSMContext):
         message.text = "/" + message.text
     await message.answer(f"Start parsing...please wait")
     async with state.proxy() as data:
+        formatter_menu_list = formatter_manu(FORMATTER_DICT)
         data["type_formatter"] = formatter_menu_list[int(message.text[1:]) - 1][1]
         print(f"{message.chat.id} try to pars in {data['type_formatter']}")
         pars_data, title = parser_items(data["sub_category"])
