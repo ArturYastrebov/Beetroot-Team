@@ -13,6 +13,7 @@ class Message(Base):
 
     owner = relationship("User", backref="messages")
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -20,4 +21,4 @@ class User(Base):
     nickname = Column(String(50))
     chat_id = Column(Integer)
 
-    message = relationship("Message", backref="users")
+    message = relationship("Message", backref="users", cascade="all, delete", passive_deletes=True)
