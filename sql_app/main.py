@@ -1,4 +1,8 @@
+from aiogram import types
+from aiogram.types import message
 from fastapi import FastAPI, status, Depends, HTTPException
+
+from aiogram_app.main import bot
 from .database import engine, SessionLocal
 from . import crud, models, schemas
 from sqlalchemy.orm import Session
@@ -45,10 +49,23 @@ async def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
 
-
 @app.get('/')
 async def start():
+    await bot.send_message(634832505, 'Hi')
     return {'message': 'Hey, wats up!'}
+
+@app.post('/send_message_by_chat_id/')
+async def send_message(message: schemas.MessageCreate):
+    await bot.send_message(message.owner_id, message.text)
+
+@app.post('/send_message_all_user_in_db/')
+async def send_message_all_user_in_db(message: schemas.MessageBase, db: Session = Depends(get_db)):
+    users = crud.get_users(db)
+    if not users:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="We have not users in DB")
+    else:
+        for user in users:
+            await bot.send_message(user.chat_id, message.text)
 
 @app.post('/message/', status_code=status.HTTP_201_CREATED)
 async def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)):

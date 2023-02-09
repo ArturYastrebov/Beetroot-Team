@@ -5,13 +5,13 @@ from pydantic import BaseModel
 
 class MessageBase(BaseModel):
     text: str
-    owner_id: int
+
 
 class MessageCreate(MessageBase):
-    pass
+    owner_id: int
 
 
-class Message(MessageBase):
+class Message(MessageCreate):
     id: int
 
 
