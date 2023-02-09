@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 
 from pydantic import BaseModel
 
@@ -14,14 +14,12 @@ class MessageCreate(MessageBase):
 class Message(MessageCreate):
     id: int
 
-
     class Config:
         orm_mode = True
 
 
 class UserBase(BaseModel):
     chat_id: int
-
 
 
 class UserCreate(UserBase):

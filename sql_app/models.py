@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, BigInteger
+from sqlalchemy import Column, ForeignKey, Integer, String, BigInteger
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -9,7 +9,7 @@ class Message(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(String(200))
-    owner_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"))
+    owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
 
     owner = relationship("User", backref="messages")
 
