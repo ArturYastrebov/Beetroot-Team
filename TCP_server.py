@@ -1,38 +1,9 @@
 import asyncio
 import json
-from json import JSONDecodeError
 
-from tcp_test.config import HOST, PORT
+from config import HOST, PORT
+from utils import is_json
 
-# {'request_id': '01', 'data': 'Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%'}
-
-# RESP =
-# {
-# 'request_id': '01',
-# 'data': {
-# 'Car1': {'name': 'some_name',
-# 'speed': '25', reaction: "Nothing"},
-# 'Car2': {'speed', '35', reaction: "Nothing"}
-# }
-def check_data(cars_data):
-    #     {"Car1": {"name": "some_name", "speed": "25", "reaction": "Nothing"}, "Car2": {"speed": "35", "reaction": "Nothing"}}
-    if isinstance(cars_data, dict):
-        for car in cars_data.values():
-            if isinstance(car, dict):
-                num = car.get("speed")
-                try:
-                    num = int(num)
-                except:
-                    raise ValueError
-    else:
-        raise ValueError
-
-async def is_json(s):
-    try:
-        json.loads(s)
-        return True
-    except:
-        return False
 
 async def reactions(car):
     speed = int(car.get('speed'))
@@ -46,7 +17,6 @@ async def reactions(car):
         elif 60 > speed:
             car['reaction'] = 'Revoke License'
     return car
-
 
 
 async def pasr_request(msg):
@@ -82,6 +52,7 @@ async def handle_echo(reader, writer):
     print(f'send message {response} to client {addr[0]}')
     writer.write(response.encode())
     await writer.drain()
+
 
 async def TCPServer():
     server = await asyncio.start_server(handle_echo, host=HOST, port=PORT)

@@ -1,6 +1,6 @@
 import asyncio
 
-from tcp_test.config import HOST, PORT
+from config import HOST, PORT
 
 
 async def tcp_client(message):

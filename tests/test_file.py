@@ -1,20 +1,21 @@
 import pytest
 
-from tcp_test.tests.conftest import check_reaction
+from tests.conftest import check_reaction
 
 @pytest.mark.asyncio
-async def test_json_data(client, test_parametrized_data):
+async def test_json_data(client, params_data):
     reader, writer = await client
-    message = test_parametrized_data
+    message, expected = params_data
     writer.write(message.encode())
     await writer.drain()
     response = await reader.read(1000)
-    assert check_reaction(response.decode())
+    assert response.decode() == expected
 
 @pytest.mark.asyncio
-async def test_error_json_data(client):
+@pytest.mark.parametrize('not_json_data', ['{"wrong_data_type1"}', '{"wrong_data_type2"}'])
+async def test_error_json_data(client, not_json_data):
     reader, writer = await client
-    message = '{"dsad"}'
+    message = not_json_data
     writer.write(message.encode())
     await writer.drain()
     response = await reader.read(1000)

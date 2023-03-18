@@ -5,7 +5,7 @@ from json import JSONDecodeError
 import pytest
 
 import pytest_asyncio
-from tcp_test.TCP_server import TCPServer
+from TCP_server import TCPServer
 
 
 # @pytest.fixture(scope="session")
@@ -44,17 +44,25 @@ def check_reaction(data_file):
                         return False
                 except TypeError:
                     raise TypeError
-                except Exception:
-                    raise '1111111111111111'
     except JSONDecodeError:
-        raise ('JSONDecodeError')
+        raise 'JSONDecodeError'
     return True
 
-@pytest.fixture(params=['{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&60%%Car2&&speed&&35%%"}',
-                         '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&50%%Car2&&speed&&25%%"}',
-                         '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&60%%Car2&&speed&&35%%"}',
-                         '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&50%%Car2&&speed&&25%%"}',
-                         '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&40%%Car2&&speed&&70%%"}',
-                         '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&50%%Car2&&speed&&100%%"}'])
-def test_parametrized_data(request):
+params_data = [('{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%"}',
+                        '{"request_id": "01", "data": {"Car1": {"name": "some_name", "speed": "25", "reaction": "Nothing"}, "Car2": {"speed": "35", "reaction": "Nothing"}}}'),
+                        ('{"request_id": "02", "data": "Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%"}',
+                        '{"request_id": "02", "data": {"Car1": {"name": "some_name", "speed": "25", "reaction": "Nothing"}, "Car2": {"speed": "35", "reaction": "Nothing"}}}'),
+                        ('{"request_id": "03", "data": "Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%"}',
+                        '{"request_id": "03", "data": {"Car1": {"name": "some_name", "speed": "25", "reaction": "Nothing"}, "Car2": {"speed": "35", "reaction": "Nothing"}}}'),
+                        ('{"request_id": "04", "data": "Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%"}',
+                        '{"request_id": "04", "data": {"Car1": {"name": "some_name", "speed": "25", "reaction": "Nothing"}, "Car2": {"speed": "35", "reaction": "Nothing"}}}')]
+
+def create_ids(data):
+    return [f"request_id: {json.loads(item[0])['request_id']}" for item in data]
+
+
+@pytest.fixture(params=params_data, ids=create_ids(params_data))
+def params_data(request):
     return request.param
+
+
