@@ -43,8 +43,9 @@ client = TCPAsyncClient(HOST, PORT)
 
 async def main():
     await client.open_connection()
-    await client.send_message('hello')
-    await client.listen_answer()
+    REQ = '{"request_id": "01", "data": "Car1&&name&&some_name&&speed&&25%%Car2&&speed&&35%%"}'
+    await client.send_message(REQ)
+    print(await client.listen_answer())
     client.disconnect()
     await client.wait_closed()
 

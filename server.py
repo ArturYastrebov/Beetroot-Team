@@ -21,18 +21,18 @@ class TCPAsyncServer:
 
     async def handle_client(self, reader, writer):
         self.connect = Connect(reader=reader, writer=writer)
-        self.server = writer.get_extra_info('peername')
-        print(f"connect client addres: {self.server}")
+        server_addres = writer.get_extra_info('peername')
+        print(f"connect client addres: {server_addres}")
         data = await reader.read(100)
         request = data.decode()
         print(request)
         if await is_json(request):
             message = json.loads(request)
-            print(f'receive message {message} from client {self.server}')
+            print(f'receive message {message} from client {server_addres}')
             response = await self.pasr_request(message)
         else:
             response = 'Data Error'
-        print(f'send message {response} to client {self.server}')
+        print(f'send message {response} to client {server_addres}')
         writer.write(response.encode())
         await writer.drain()
 
