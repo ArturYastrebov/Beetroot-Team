@@ -31,26 +31,29 @@ class TCPAsyncServer:
             print(f'receive message {message} from client {server_addres}')
             response = await self.pasr_request(message)
         else:
-            response = 'Data Error'
+            response = 'Data Error. Is not json format.'
         print(f'send message {response} to client {server_addres}')
         writer.write(response.encode())
         await writer.drain()
 
     async def pasr_request(self, msg):
-        my_dict_data = {}
-        request_id = msg.get('request_id')
-        data = msg.get('data')
-        hendler_data = data.split('%%')
-        # 'Car1&&name&&some_name&&speed&&25
-        for i in hendler_data:
-            if i:
-                item = i.split('&&')
-                cars_data = dict(zip(item[1::2], item[2::2]))
-                cars_data = await self.reactions(cars_data)
-                my_dict_data[item[0]] = cars_data
-        RESP = {"request_id": request_id}
-        RESP["data"] = my_dict_data
-        RESP = json.dumps(RESP)
+        try:
+            my_dict_data = {}
+            request_id = msg.get('request_id')
+            data = msg.get('data')
+            hendler_data = data.split('%%')
+            # 'Car1&&name&&some_name&&speed&&25
+            for i in hendler_data:
+                if i:
+                    item = i.split('&&')
+                    cars_data = dict(zip(item[1::2], item[2::2]))
+                    cars_data = await self.reactions(cars_data)
+                    my_dict_data[item[0]] = cars_data
+            RESP = {"request_id": request_id}
+            RESP["data"] = my_dict_data
+            RESP = json.dumps(RESP)
+        except (TypeError, AttributeError):
+            RESP = 'Data Error. Not correct json file.'
         return RESP
 
     async def reactions(self, car):
@@ -58,9 +61,9 @@ class TCPAsyncServer:
         if speed:
             if speed <= 50:
                 car['reaction'] = 'Nothing'
-            elif 50 > speed >= 55:
+            elif 55 >= speed > 50:
                 car['reaction'] = 'Warning'
-            elif 55 > speed >= 60:
+            elif 60 >= speed > 55:
                 car['reaction'] = 'Penalty'
             elif 60 > speed:
                 car['reaction'] = 'Revoke License'
