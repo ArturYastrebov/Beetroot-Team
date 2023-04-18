@@ -2,8 +2,25 @@
 import json
 
 json_data = '{"person": {"name": "John", "age": 30, "city": "New York"}}'
-json_to_dict = json.loads(json_data)
-print(json_to_dict)
-print(json_to_dict['person']['name'])
-print(json_to_dict['person']['age'])
-print(json_to_dict['person']['city'])
+
+
+class Person:
+    def __init__(self, name, age, city):
+        self.name = name
+        self.age = age
+        self.city = city
+
+    def __str__(self):
+        return f"{self.name} ({self.age}, {self.city})"
+
+    def to_dict(self):
+        return {"name": self.name, "age": self.age, "city": self.city}
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["name"], data["age"], data["city"])
+
+# Deserialize JSON string back to object
+data = json.loads(json_data)
+person = Person.from_dict(data['person'])
+print(person)
