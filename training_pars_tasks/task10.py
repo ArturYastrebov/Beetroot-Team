@@ -3,7 +3,10 @@
 import json
 import re
 
-data = "RESPONSE@HEADER@customer_info={customer_name:John Doe;customer_email:johndoe@example.com;customer_phone:123-456-7890}order_details={order_id:5678;order_date:2023-04-18;order_items={product_name:apple;quantity:5}{product_name:banana;quantity:3}{product_name:orange;quantity:2}}payment_info={payment_method:credit_card;payment_amount:15.99}@"
+RESPONSE = "RESPONSE@HEADER@customer_info={customer_name:John Doe;customer_email:johndoe@example.com;" \
+       "customer_phone:123-456-7890}order_details={order_id:5678;order_date:2023-04-18;order_items=" \
+       "{product_name:apple;quantity:5}{product_name:banana;quantity:3}{product_name:orange;quantity:2}}payment_info=" \
+       "{payment_method:credit_card;payment_amount:15.99}@"
 
 def pars_tcp_response(data):
     pattern_customer_info = r'customer_info=\{([\w:;@. -]+)\}'
@@ -37,7 +40,7 @@ def collect_result(collect_data):
 def dict_to_json(dict_obj):
     return json.dumps(dict_obj)
 
-collect_data = pars_tcp_response(data)
+collect_data = pars_tcp_response(RESPONSE)
 dict_response = collect_result(collect_data)
 print(dict_response)
 
