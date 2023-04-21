@@ -40,9 +40,33 @@ def collect_result(collect_data):
 def dict_to_json(dict_obj):
     return json.dumps(dict_obj)
 
+def create_json(dict_obj):
+    with open('json_file.json', 'w') as f:
+        json.dump(dict_obj, f)
+
+def read_json(json_name_file):
+    with open(json_name_file, 'r') as f:
+        return json.load(f)
+
+def create_txt():
+    with open('file.txt', 'r') as f:
+        data = f.read()
+        print(data)
+
+
+def json_to_dict(str_like_json):
+    return json.loads(str_like_json)
+
+
 collect_data = pars_tcp_response(RESPONSE)
 dict_response = collect_result(collect_data)
 print(dict_response)
 
 json_str_response = dict_to_json(dict_response)
 print(json_str_response)
+
+create_json(dict_response)
+print(read_json('json_file.json'))
+
+print(json_to_dict(json_str_response))
+
