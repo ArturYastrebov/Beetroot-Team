@@ -11,15 +11,22 @@ RESP1 = '{"request_id": "02", "data": {"Device1": {"name": "dev_name", "temperat
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize('req, resp', [(REQ2, RESP2), (REQ1, RESP1)])
-async def test_connect_to_db(create_client, req, resp):
-    await create_client.write_message(req)
-    expected_result = await create_client.read_message()
+async def test_sent_req_param(client, req, resp):
+    await client.write_message(req)
+    expected_result = await client.read_message()
     assert expected_result.decode('utf-8') == resp
 
 
 @pytest.mark.asyncio
-async def test_connect_to_db_param(create_client, parametrize_req):
+async def test_sent_req_param_fixture(client, parametrize_req):
     REQ, RESP = parametrize_req
-    await create_client.write_message(REQ)
-    expected_result = await create_client.read_message()
+    await client.write_message(REQ)
+    expected_result = await client.read_message()
     assert expected_result.decode('utf-8') == RESP
+
+@pytest.mark.asyncio
+async def test_connect_db(client):
+    await client.write_message('REQ')
+    RESP = await client.read_message()
+    assert RESP.decode('utf-8') == 'REQ'
+

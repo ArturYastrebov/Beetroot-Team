@@ -13,7 +13,12 @@ class Client:
         self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
 
     async def connect_to_db(self):
-        await self.write_message('connect to DB')
+        await self.write_message('{"request_id": "01", "data": "db_connect"}')
+        await self.read_message()
+
+
+    async def close_db_connect(self):
+        await self.write_message('close DB connect')
         await self.read_message()
 
 
@@ -32,8 +37,9 @@ class Client:
 
     async def close_connect(self):
         print('close connect')
-        self.writer.close()
-        await self.writer.wait_closed()
+        if self.writer.is_closing():
+            self.writer.close()
+            await self.writer.wait_closed()
 
 
 async def main():
