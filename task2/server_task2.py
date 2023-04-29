@@ -16,7 +16,7 @@ class Server_TCP:
             msg_byte = await self.read_message(reader)
             msg_str = msg_byte.decode('utf-8')
             if not msg_byte:
-                break
+                continue
             elif is_json(msg_str):
                 if json_to_dict(msg_str)['data'] == 'db_connect':
                     dict_data = json_to_dict(msg_str)

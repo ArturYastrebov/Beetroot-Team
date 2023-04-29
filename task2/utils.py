@@ -5,7 +5,7 @@ def is_json(str_like_json):
     try:
         data_dict = json.loads(str_like_json)
         return True
-    except:
+    except json.JSONDecodeError:
         return False
 
 
