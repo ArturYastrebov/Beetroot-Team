@@ -1,4 +1,5 @@
 import asyncio
+import random
 from dataclasses import dataclass
 
 from aioconsole import ainput
@@ -44,7 +45,7 @@ class Client:
 
 
 async def main():
-    client = Client('localhost', 8383)
+    client = Client('localhost', 8484)
     await client.connect_to_server()
     await asyncio.gather(client.sent_message(), client.get_message())
 

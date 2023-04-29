@@ -13,9 +13,9 @@ async def main():
     REQ2 ='{"request_id": "03","data": "Device1&&name&&dev_name&&temperature&&55%%Device2&&name&&dev_name&&temperature&&24"}'
     REQ3 ='{"request_id": "04","data": "Device1&&name&&dev_name&&temperature&&5%%Device2&&name&&dev_name&&temperature&&4"}'
     await client.write_message(REQ)
-    # await client.write_message(REQ2)
+    await client.write_message('')
     # await client.write_message(REQ3)
-    # await client.read_message()
+    await client.read_message()
     # await client.read_message()
     await client.read_message()
     await client.close_db_connect()

@@ -26,7 +26,7 @@ async def test_sent_req_param_fixture(client, parametrize_req):
 
 @pytest.mark.asyncio
 async def test_connect_db(client):
-    await client.write_message('REQ')
+    await client.write_message('{"request_id": "01", "data": "db_connect"}')
     RESP = await client.read_message()
-    assert RESP.decode('utf-8') == 'REQ'
+    assert RESP.decode('utf-8') == '{"request_id": "01", "data": "db_connected"}'
 
