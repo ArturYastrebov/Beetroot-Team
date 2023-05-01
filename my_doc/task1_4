@@ -1,0 +1,15 @@
+1.    Inversion parsing from a response to a request format:
+        Response: {"result": "success", "data": [{"id": 1, "name": "Alice", "age": 30}, {"id": 2, "name": "Bob", "age": 25}]}
+        Request: {"request_id": "123", "data": "1&&id&&1&&name&&Alice&&age&&30%%2&&id&&2&&name&&Bob&&age&&25"}
+
+2.    Inversion parsing from a request to a response format:
+        Request: {"request_id": "123", "data": "1&&name&&Alice&&age&&30%%2&&name&&Bob&&age&&25"}
+        Response: {"result": "success", "data": [{"id": 1, "name": "Alice", "age": 30}, {"id": 2, "name": "Bob", "age": 25}]}
+
+3.    Inversion parsing from a response to a nested dictionary:
+        Response: {"result": "success", "data": {"user": {"id": 1, "name": "Alice", "age": 30}, "status": "active"}}
+        Dictionary: {"user": {"id": 1, "name": "Alice", "age": 30}, "status": "active"}
+
+4.    Inversion parsing from a nested dictionary to a response:
+        Dictionary: {"user": {"id": 1, "name": "Alice", "age": 30}, "status": "active"}
+        Response: {"result": "success", "data": {"user": {"id": 1, "name": "Alice", "age": 30}, "status": "active"}}

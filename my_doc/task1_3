@@ -1,0 +1,11 @@
+    Inversion parsing from a response to a request format:
+        Response: {"result": "success", "data": {"id": 1, "name": "Alice", "age": 30, "address": {"street": "123 Main St", "city": "New York", "state": "NY"}}}
+        Request: {"request_id": "123", "data": "1&&id&&1&&name&&Alice&&age&&30&&address&&street&&123 Main St&&address&&city&&New York&&address&&state&&NY"}
+
+    Inversion parsing from a response to a request format:
+        Response: {"result": "success", "data": [{"id": 1, "name": "Alice", "age": 30, "address": {"street": "123 Main St", "city": "New York", "state": "NY"}}, {"id": 2, "name": "Bob", "age": 25, "address": {"street": "456 Elm St", "city": "San Francisco", "state": "CA"}}]}
+        Request: {"request_id": "123", "data": "1&&id&&1&&name&&Alice&&age&&30&&address&&street&&123 Main St&&address&&city&&New York&&address&&state&&NY%%2&&id&&2&&name&&Bob&&age&&25&&address&&street&&456 Elm St&&address&&city&&San Francisco&&address&&state&&CA"}
+
+    Inversion parsing from a response to a request format:
+        Response: {"result": "success", "data": {"users": [{"id": 1, "name": "Alice", "age": 30}, {"id": 2, "name": "Bob", "age": 25}]}}
+        Request: {"request_id": "123", "data": "1&&id&&1&&name&&Alice&&age&&30%%2&&id&&2&&name&&Bob&&age&&25"}
